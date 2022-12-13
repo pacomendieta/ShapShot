@@ -1,6 +1,6 @@
 import React from "react"
 import Form from "../components/Form"
-import { create } from "react-test-renderer"
+import { create, act } from "react-test-renderer"
 
 let component;
 const props = {
@@ -19,6 +19,20 @@ describe("<Form />", ()=>{
         expect(component.root.findByType("input")).toBeDefined() //tenga un hijo "input"
         expect(component.root.findByType("button")).toBeDefined() //tenga un hijo "button"
         expect(component.root.findByType("svg")).toBeDefined() //tenga un hijo "svg"
-        console.log( component.toJSON())   
     })
+    it ("El boton enabled si el input no está vacío", ()=>{
+        const form = component.root.findByType("form")
+        const input = form.findByType("input")
+        const button = form.findByType("button")
+        expect(button.props.disabled).toBeTruthy() // que disabled sea true
+        expect(button.props.className).toEqual("search-button null") //atributo class inicial
+
+        //simular cambio de valor en el elemento input ejecutando input.onChange()
+        act( ()=>{
+            input.props.onChange( {target:{value: "coche"}})
+        })
+
+    })
+
+
 })
