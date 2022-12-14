@@ -5,7 +5,7 @@ import { create, act } from "react-test-renderer"
 let component;
 const props = {
     history: {},
-    handleSumbit: ()=>{}
+    handleSubmit: ()=>{}
 }
 describe("<Form />", ()=>{
     //Primer caso de prueba
@@ -13,6 +13,7 @@ describe("<Form />", ()=>{
     beforeEach( ()=>{
         component = create(<Form {...props} />)
     })
+
     it ("Renderiza correctamente", ()=>{
         expect(component).toBeDefined();  //componente definido
         expect(component.toJSON().type).toEqual("form") // su tipo sea "form"
@@ -27,11 +28,20 @@ describe("<Form />", ()=>{
         expect(button.props.disabled).toBeTruthy() // que disabled sea true
         expect(button.props.className).toEqual("search-button null") //atributo class inicial
 
-        //simular cambio de valor en el elemento input ejecutando input.onChange()
+        //act:    simular cambio de valor en el elemento input ejecutando input.onChange()
+        //expect: se debe habilitar el boton buscar
         act( ()=>{
             input.props.onChange( {target:{value: "coche"}})
         })
+        expect(button.props.disabled).toBeFalsy()
+        expect(button.props.className).toEqual("search-button active")
 
+    })
+
+    it ("Se llama al onSubmit al clicar boton buscar", ()=>{
+        const form = component.root.findByType("form")
+
+        form.props.onSubmit();
     })
 
 
