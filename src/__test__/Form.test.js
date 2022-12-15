@@ -5,7 +5,7 @@ import { create, act } from "react-test-renderer"
 let component;
 const props = {
     history: {},
-    handleSubmit: ()=>{}
+    handleSubmit: jest.fn()
 }
 describe("<Form />", ()=>{
     //Primer caso de prueba
@@ -40,8 +40,10 @@ describe("<Form />", ()=>{
 
     it ("Se llama al onSubmit al clicar boton buscar", ()=>{
         const form = component.root.findByType("form")
-
         form.props.onSubmit();
+        expect(props.handleSubmit).toHaveBeenCalled()
+        expect(props.handleSubmit).toHaveBeenCalledTimes(1)
+        expect(props.handleSubmit).toHaveBeenCalledWith( undefined, props.history,"")
     })
 
 
