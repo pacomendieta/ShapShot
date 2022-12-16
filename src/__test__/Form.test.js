@@ -5,8 +5,10 @@ import { create, act } from "react-test-renderer"
 let component;
 const props = {
     history: {},
-    handleSubmit: jest.fn()
+    handleSubmit: jest.fn().mockName("Funcion handleSumbit")
 }
+props.handleSubmit.mockReturnValue(99)
+
 describe("<Form />", ()=>{
     //Primer caso de prueba
     //  -- empezar con una instancia limpia del componente
@@ -21,7 +23,7 @@ describe("<Form />", ()=>{
         expect(component.root.findByType("button")).toBeDefined() //tenga un hijo "button"
         expect(component.root.findByType("svg")).toBeDefined() //tenga un hijo "svg"
     })
-    it ("El boton enabled si el input no está vacío", ()=>{
+    it ("El botón enabled si el input no está vacío", ()=>{
         const form = component.root.findByType("form")
         const input = form.findByType("input")
         const button = form.findByType("button")
@@ -40,10 +42,12 @@ describe("<Form />", ()=>{
 
     it ("Se llama al onSubmit al clicar boton buscar", ()=>{
         const form = component.root.findByType("form")
-        form.props.onSubmit();
+        form.props.onSubmit("Paco");
+        form.props.onSubmit("Pepe");
+        form.props.onSubmit("Jose");
         expect(props.handleSubmit).toHaveBeenCalled()
-        expect(props.handleSubmit).toHaveBeenCalledTimes(1)
-        expect(props.handleSubmit).toHaveBeenCalledWith( undefined, props.history,"")
+        expect(props.handleSubmit).toHaveBeenCalledTimes(3)
+        expect(props.handleSubmit).toHaveBeenCalledWith( "Paco", props.history,"")
     })
 
 
