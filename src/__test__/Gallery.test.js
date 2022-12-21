@@ -1,5 +1,5 @@
 import React from 'react'
-import { create } from "react-test-renderer"
+import { create, act } from "react-test-renderer"
 import Gallery from "../components/Gallery"
 import NoImages from '../components/NoImages';
 import Image from '../components/Image';
@@ -10,8 +10,8 @@ const props = {
 }
 
 describe("<Gallery /> test", ()=>{
-    beforeEach(()=>{
-        component = create(<Gallery {...props} />)
+    beforeEach(async ()=>{
+        component = await create(<Gallery {...props} />)
     })
 
     // Caso1: Renderiza
@@ -26,14 +26,16 @@ describe("<Gallery /> test", ()=>{
         expect(component.root.findByType(NoImages).toBeDefined)
     })
 
-    it ("Renderiza las imagenes si data no vacia o si cambia", ()=>{
+    it ("Renderiza las imagenes si data no vacia o si cambia", async ()=>{
         const data = [
             {farm: "farmTest01", server: "serverTest", id:"testid01", secret:"sfsdf", title:"titleTest91"},
             {farm: "farmTest02", server: "serverTest", id:"testid02", secret:"sfsdf", title:"titleTest02"},
             {farm: "farmTest03", server: "serverTest", id:"testid03", secret:"sfsdf", title:"titleTest03"},
             {farm: "farmTest04", server: "serverTest", id:"testid04", secret:"sfsdf", title:"titleTest04"},
         ]
-        component.update(<Gallery data={data} />)
+        await act ( async()=>{
+            await component.update(<Gallery data={data} />)
+        })
         expect(component.root.findAllByType(NoImages).length).toEqual(0)
         expect(component.root.findAllByType(Image).length).toEqual(data.length)
 

@@ -23,7 +23,7 @@ describe("<Form />", ()=>{
         expect(component.root.findByType("button")).toBeDefined() //tenga un hijo "button"
         expect(component.root.findByType("svg")).toBeDefined() //tenga un hijo "svg"
     })
-    it ("El botón enabled si el input no está vacío", ()=>{
+    it ("El botón enabled si el input no está vacío", async ()=>{
         const form = component.root.findByType("form")
         const input = form.findByType("input")
         const button = form.findByType("button")
@@ -32,7 +32,7 @@ describe("<Form />", ()=>{
 
         //act:    simular cambio de valor en el elemento input ejecutando input.onChange()
         //expect: se debe habilitar el boton buscar
-        act( ()=>{
+        await act( ()=>{
             input.props.onChange( {target:{value: "coche"}})
         })
         expect(button.props.disabled).toBeFalsy()
