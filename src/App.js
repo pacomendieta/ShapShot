@@ -32,13 +32,11 @@ class App extends Component {
               <Route
                 exact
                 path="/"
-                render={() => <Redirect to="/mountain" />}
+                render={() => <Redirect to="/car" />}
               />
 
-              <Route
-                path="/mountain"
-                render={() => <Item searchTerm="mountain" />}
-              />
+              <Route path="/car" render={()=><Item searchTerm="car"/>} />
+              <Route path="/mountain" render={()=><Item searchTerm="mountain"/>} />
               <Route path="/beach" render={() => <Item searchTerm="beach" />} />
               <Route path="/bird" render={() => <Item searchTerm="bird" />} />
               <Route path="/food" render={() => <Item searchTerm="food" />} />
