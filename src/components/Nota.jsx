@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import './nota.css'
 
 
 
-const Nota = ( {nota })=>{
-    const toggleImportance = ()=>nota.important = !nota.important
-    const label = nota.important 
+const Nota = ( {nota, handleClick})=>{
+    let toggleImportance
+    const [important, setImportant] = useState(false)
+    if ( typeof handleClick == 'undefined') {
+            toggleImportance = ()=>{setImportant(!important); console.log("Toggle",important);}
+    }
+    else {
+        toggleImportance = handleClick
+    }
+
+    const label = important 
     ? 'Quitar Important' 
     : 'Hacer Important'
 

@@ -12,7 +12,7 @@ const Container = ({ searchTerm }) => {
   }, [searchTerm]);
   const nota1 = {content:"Contenido Nota 1", important:true}
   const nota2 = {content:"Contenido Nota 2", important:false}
-  const nota3 = {content:"Contenido Nota 3", important:true}
+  const nota3 = {content:"Contenido Nota 3", important:true }
   return (
     <div className = "main-container">
       <div className="photo-container">
@@ -21,7 +21,7 @@ const Container = ({ searchTerm }) => {
       </div>
       <div className="=notas-container">
         <h2>Notas</h2> 
-          <Nota nota={nota1} />
+          <Nota nota={nota1} handleClick={()=>{console.log("click1")}} />
           <Nota nota={nota2} />
           <Nota nota={nota3} />
       </div>
