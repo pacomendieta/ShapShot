@@ -22,7 +22,7 @@ const Nota = ( {nota, handleClick})=>{
             <div>
                 { nota.content}
             </div>
-            <button onClick = {toggleImportance}>{label}</button>
+            <button className='boton' onClick = {toggleImportance}>{label}</button>
         </li>
     )
 }
