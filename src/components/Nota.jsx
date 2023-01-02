@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import './nota.css'
-
+import i18n from '../i18n/index'
 
 
 const Nota = ( {nota, handleClick})=>{
@@ -14,8 +14,8 @@ const Nota = ( {nota, handleClick})=>{
     }
 
     const label = important 
-    ? 'Quitar Important' 
-    : 'Hacer Important'
+    ? i18n.NOTA.BOTON_QUITAR
+    : i18n.NOTA.BOTON_PONER
 
     return (
         <li className="nota">

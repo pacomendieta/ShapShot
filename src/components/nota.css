@@ -6,5 +6,6 @@
 }
 
 .boton {
+    border-radius: 15%;
     background-color:rgb(181, 239, 181)
 }
