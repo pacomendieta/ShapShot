@@ -26,7 +26,7 @@ describe("Agrupacion de Casos de Prueba",()=>{
       
     })
     
-    test ('Test click en boton buscar', ()=>{
+    test ('Test click en boton buscar. Texto Cambiado.', ()=>{
         const nota = { content:'Esto es un test', important:true}
      
         //Testar evento click en elemento
